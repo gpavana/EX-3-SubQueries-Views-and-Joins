@@ -71,7 +71,8 @@ INSERT INTO DEPT (DEPTNO, DNAME, LOC) VALUES (40, 'OPERATIONS', 'BOSTON');
 ### QUERY:
 
 
-### OUTPUT:
+### OUTPUT:![image](https://github.com/gpavana/EX-3-SubQueries-Views-and-Joins/assets/118787343/494327de-e790-4ce3-afff-c1ef510412c0)
+
 
 ### Q2) List the ename,job,sal of the employee who get minimum salary in the company.
 
