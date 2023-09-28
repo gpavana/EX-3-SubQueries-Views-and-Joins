@@ -68,7 +68,7 @@ INSERT INTO DEPT (DEPTNO, DNAME, LOC) VALUES (40, 'OPERATIONS', 'BOSTON');
 ### Q1) List the name of the employees whose salary is greater than that of employee with empno 7566.
 
 
-### QUERY:
+### QUERY:CREATE VIEW details AS SELECT ENAME FROM EMP WHERE SALARY >(select SALARY from EMP where EMPNO=7566);
 
 
 ### OUTPUT:![image](https://github.com/gpavana/EX-3-SubQueries-Views-and-Joins/assets/118787343/494327de-e790-4ce3-afff-c1ef510412c0)
