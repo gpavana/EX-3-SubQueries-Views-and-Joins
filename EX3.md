@@ -69,59 +69,65 @@ INSERT INTO DEPT (DEPTNO, DNAME, LOC) VALUES (40, 'OPERATIONS', 'BOSTON');
 
 ### QUERY:
 ```
-CREATE VIEW details AS SELECT ENAME FROM EMP WHERE SALARY >(select SALARY from EMP where EMPNO=7566);
+SELECT ename FROM EMP WHERE sal > (SELECT sal FROM EMP WHERE empno = 7566);
 ```
 
-### OUTPUT:![image](https://github.com/gpavana/EX-3-SubQueries-Views-and-Joins/assets/118787343/494327de-e790-4ce3-afff-c1ef510412c0)
+### OUTPUT:
+![image](https://github.com/gpavana/EX-3-SubQueries-Views-and-Joins/assets/118787343/eff2b10c-3ce3-419e-b7e3-aef9402f9f8c)
 
 ### Q2) List the ename,job,sal of the employee who get minimum salary in the company.
 
 ### QUERY:
 ```
- CREATE VIEW minimum AS select ENAME,JOB,SALARY from EMP where SALARY =(select MIN(SALARY) from EMP);
+SELECT ename,job,sal FROM EMP WHERE sal = (SELECT MIN(sal) FROM EMP);
 ```
 
 ### OUTPUT:
-![image](https://github.com/gpavana/EX-3-SubQueries-Views-and-Joins/assets/118787343/7f8b8a5c-fc98-427e-9977-ff218088778d)
+![image](https://github.com/gpavana/EX-3-SubQueries-Views-and-Joins/assets/118787343/afb670c6-459f-446a-95b2-eefaa69fe81b)
+
 
 
 ### Q3) List ename, job of the employees who work in deptno 10 and his/her job is any one of the job in the department ‘SALES’.
 
 ### QUERY:
 ```
-select ENAME,JOB from EMP where  DEPTNO=10 AND JOB='SALESMAN';
+SELECT ename,job FROM EMP WHERE deptno = 10 AND job IN (SELECT job FROM EMP WHERE job = 'sales');
 ```
 ### OUTPUT:
-![image](https://github.com/gpavana/EX-3-SubQueries-Views-and-Joins/assets/118787343/e3827cd9-8ec2-4c5c-b5b3-67da5c14fc2c)
+![image](https://github.com/gpavana/EX-3-SubQueries-Views-and-Joins/assets/118787343/ad145a33-eb99-4247-a4eb-b4c4ee0043c6)
+
 
 ### Q4) Create a view empv5 (for the table emp) that contains empno, ename, job of the employees who work in dept 10.
 
 ### QUERY:
 ```
 create view empv5 as select EMPNO,ENAME,JOB from EMP where DEPTNO=10;
+SELECT * FROM empv5;
 ```
 ### OUTPUT:
-![image](https://github.com/gpavana/EX-3-SubQueries-Views-and-Joins/assets/118787343/33e09782-5175-45a9-8eca-b1a18822cb6c)
+![image](https://github.com/gpavana/EX-3-SubQueries-Views-and-Joins/assets/118787343/5fe6a2a1-d754-4868-992b-3be6db379c1c)
+
 
 ### Q5) Create a view with column aliases empv30 that contains empno, ename, sal of the employees who work in dept 30. Also display the contents of the view.
 
 ### QUERY:
 ```
-create view empv30 AS select EMPNO,ENAME,SALARY from EMP where DEPTNO=30;
+create view empv30 AS select EMPNO,ENAME,SAL from EMP where DEPTNO=30;
+SELECT * FROM empv30;
 ```
 ### OUTPUT:
-![image](https://github.com/gpavana/EX-3-SubQueries-Views-and-Joins/assets/118787343/d129eeca-fc97-4370-9150-63bd5779a9a3)
+![image](https://github.com/gpavana/EX-3-SubQueries-Views-and-Joins/assets/118787343/44f2e5f6-6a46-4902-a437-8852b12d42ee)
+
 
 ### Q6) Update the view empv5 by increasing 10% salary of the employees who work as ‘CLERK’. Also confirm the modifications in emp table
 
 ### QUERY:
 ```
-update EMP set SALARY=SALARY*1.1 WHERE JOB='clerk';
-
+UPDATE EMP SET sal = sal * 1.1 WHERE job = 'CLERK';
 create view empv5 as select EMPNO,ENAME,SALARY,JOB from EMP;
 ```
 ### OUTPUT:
-![image](https://github.com/gpavana/EX-3-SubQueries-Views-and-Joins/assets/118787343/e694aa2b-71e0-4dee-96a8-b1957d59d912)
+![image](https://github.com/gpavana/EX-3-SubQueries-Views-and-Joins/assets/118787343/5aba65bf-4e79-456f-a801-4fbc91c0eb5c)
 
 ## Create a Customer1 Table
 ```sql
@@ -155,36 +161,41 @@ INSERT INTO Salesman1 (salesman_id, name, city, commission) VALUES(5003, 'Lauson
 
 ### QUERY:
 ```
-select s.name,c.cust_name,s.city from salesman1 as s ,customer1 as c where s.city=c.city;
+select s.name,c.cust_name,s.city from salesman1 s ,customer1 c where s.city=c.city;
 ```
 ### OUTPUT:
-![image](https://github.com/gpavana/EX-3-SubQueries-Views-and-Joins/assets/118787343/da13834d-c81d-43db-9c93-29ed07388cfe)
+![image](https://github.com/gpavana/EX-3-SubQueries-Views-and-Joins/assets/118787343/0c610888-d71f-472b-ac9c-825ccde5bd1c)
+
 
 ### Q8) Write a SQL query to find salespeople who received commissions of more than 13 percent from the company. Return Customer Name, customer city, Salesman, commission.
 
 ### QUERY:
 ```
-select s.name,c.cust_name,c.city,s.commission from salesman1 as s inner join customer1 as c on s.city=c.city where s.commission>0.13;
+select s.name,c.cust_name,c.city,s.commission from salesman1 s inner join customer1 c on s.city=c.city where s.commission>0.13;
 ```
 ### OUTPUT:
-![image](https://github.com/gpavana/EX-3-SubQueries-Views-and-Joins/assets/118787343/3c641be0-8043-43fe-aab9-a62a24525965)
+![image](https://github.com/gpavana/EX-3-SubQueries-Views-and-Joins/assets/118787343/afde8e44-ccc4-4c6b-a88a-98b5af2fe1e4)
+
 
 ### Q9) Perform Natural join on both tables
 
 ### QUERY:
 ```
- select s.name,c.cust_name,c.city,s.commission from salesman1 as s natural join customer1 as c where s.commission>0.13;
+  select * from salesman1 s natural join customer1 c;
 ```
 ### OUTPUT:
-![image](https://github.com/gpavana/EX-3-SubQueries-Views-and-Joins/assets/118787343/ab30f614-3a1c-452c-96fd-e3eadaef545b)
+
+![image](https://github.com/gpavana/EX-3-SubQueries-Views-and-Joins/assets/118787343/ddfe423b-d35d-42fb-aba8-7dcf789c2978)
 
 ### Q10) Perform Left and right join on both tables
 
 ### QUERY:
 ```
-select s.name,c.cust_name,c.city,s.commission from salesman1 as s left join customer1 as c on s.salesman_id=c.salesman_id where s.commission>0.13;
-
-select s.name,c.cust_name,c.city,s.commission from salesman1 as s right join customer1 as c on s.salesman_id=c.salesman_id where s.commission>0.13;
+select s.name,c.cust_name,c.city,s.commission from salesman1 s left join customer1 c on s.salesman_id=c.salesman_id;
+select s.name,c.cust_name,c.city,s.commission from salesman1 s right join customer1 c on s.salesman_id=c.salesman_id;
 ```
 ### OUTPUT:
-![image](https://github.com/gpavana/EX-3-SubQueries-Views-and-Joins/assets/118787343/986fc1d0-488f-47fd-a494-020f90a7b75b)
+![image](https://github.com/gpavana/EX-3-SubQueries-Views-and-Joins/assets/118787343/a01c0384-98d1-4819-956e-dcf554dc6b36)
+
+### RESULT:
+To create a database and implementation of views,subqueries and joins is executed successfully.
